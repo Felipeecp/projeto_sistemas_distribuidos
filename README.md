@@ -2,6 +2,12 @@
 
 Este repositório contém a especificação do projeto de análise climática em São Luís, desenvolvido pelos alunos Clebson Mendonça Machado da Silva, Luiz Felipe Silva Santos e Miquéias Pereira Coelho, como parte do curso de Engenharia da Computação da Universidade Federal do Maranhão.
 
+## Diagrama
+
+Diagrama que representa sistema desenvolvido:
+
+![Local Image](assets/img/diagrama_do_sistema.jpeg)
+
 ## Objetivos
 
 O objetivo geral do projeto é desenvolver uma aplicação para análise climática utilizando dados temporais na cidade de São Luís junto a dados climaticos disponibilizados pelo INPE. Os objetivos específicos incluem:
