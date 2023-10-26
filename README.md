@@ -32,7 +32,7 @@ O prazo para a conclusão do projeto é até o dia 27 de novembro de 2023. Para 
 | 10/10/2023 | Instação de sensores e aplicação de monitoramento e tratamento de dados     | ✅       |
 | 17/10/2023 | Desenvolvimento de Middleware de comunicação entre serviços                 | 🟡       |
 | 24/10/2023 | Desenvolvimento ed aplicação de obtenção de dados do INPE                   | 🟡       |
-| 07/11/2023 | Desenvolvimento de Front-end para visualização                              | 🔲       |
+| 07/11/2023 | Desenvolvimento de Front-end para visualização                              | 🟡       |
 | 14/11/2023 | Testes e validação da aplicação                                             | 🔲       |
 | 28/11/2023 | Entrega final do projeto                                                    | 🔲       |
 
