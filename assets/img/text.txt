@@ -1,0 +1,6 @@
+docker run --name clients \
+        -p 8580:8580 \
+        -v /opt/docker/log:/app/log \
+        --link eureka:eureka \
+        --link gateway:gateway \
+        -d clients:0.1  

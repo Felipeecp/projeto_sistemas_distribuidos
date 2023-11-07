@@ -1,0 +1,84 @@
+version: "3.8"
+
+services:
+
+        eureka:
+                build: ./server/
+                image: eureka-server:0.1
+                container_name: eureka
+                ports:
+                        - "8761:8761"
+                networks:
+                        micro_network:
+                                ipv4_address: 172.19.0.2
+                deploy:
+                        resources:
+                                limits:
+                                        cpus: '0.50'
+                                        memory: 512M
+
+        readsensor:
+                build: ./readsensor/
+                image: readsensor:0.1
+                container_name: readsensor
+                ports:
+                        - "8380:8380"
+                links:
+                        - eureka
+                        - gateway
+                volumes:
+                        - /opt/docker/log:/app/log
+                networks:
+                        micro_network:
+                                ipv4_address: 172.19.0.4
+                deploy:
+                        resources:
+                                limits:
+                                        cpus: '0.50'
+                                        memory: 512M
+
+        sensorsave:
+                build: ./sensorsave/
+                image: sensorsave:0.1
+                container_name: sensorsave
+                ports:
+                        - "8182:8182"
+                links:
+                        - eureka
+                        - gateway
+                volumes:
+                        - /opt/docker/log:/app/log
+                networks:
+                        micro_network:
+                                ipv4_address: 172.19.0.5
+                deploy:
+                        resources:
+                                limits:
+                                        cpus: '0.50'
+                                        memory: 512M
+
+        gateway:
+                build: ./gateway/
+                image: gateway-server:0.1
+                container_name: gateway
+                links:
+                        - eureka
+                ports:
+                        - "8180:8180"
+                networks:
+                        micro_network:
+                                ipv4_address: 172.19.0.6
+                deploy:
+                        resources:
+                                limits:
+                                        cpus: '0.50'
+                                        memory: 512M
+        
+networks:
+        micro_network:
+                driver: bridge  
+                ipam:
+                        driver: default
+                        config:
+                                - subnet: "172.19.0.0/16"
+    
