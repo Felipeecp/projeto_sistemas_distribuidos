@@ -42,7 +42,7 @@ services:
                 image: sensorsave:0.1
                 container_name: sensorsave
                 ports:
-                        - "8182:8182"
+                        - "8480:8480"
                 links:
                         - eureka
                         - gateway
@@ -56,6 +56,27 @@ services:
                                 limits:
                                         cpus: '0.50'
                                         memory: 512M
+
+        client:
+                build: ./clients/
+                image: clients:0.1
+                container_name: clients
+                ports:
+                        - "8580:8580"
+                links:
+                        - eureka
+                        - gateway
+                volumes:
+                        - /opt/docker/log:/app/log
+                networks:
+                        micro_network:
+                                ipv4_address: 172.19.0.3
+                deploy:
+                        resources:
+                                limits:
+                                        cpus: '0.50'
+                                        memory: 512M
+
 
         gateway:
                 build: ./gateway/
