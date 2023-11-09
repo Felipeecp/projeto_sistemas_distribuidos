@@ -1,0 +1,22 @@
+
+spring:
+  application:
+    name: sensor-save-ms
+  rabbitmq:
+    host: ${HOST_MQ}
+    virtual-host: ${VIRTUAL_HOST_MQ}
+    port: ${PORT_MQ}
+    username: ${USERNAME_MQ}
+    password: ${PASSWORD_MQ}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_SERVER}:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    preferIpAddress: true
+
+mq:
+  queues:
+    dados-sensores: dados-sensores

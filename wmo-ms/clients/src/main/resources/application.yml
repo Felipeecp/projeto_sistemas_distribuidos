@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: clients-ms
+
+server:
+  port: 0
+
+eureka:
+  client:
+    server-url:
+      defaultZone: http://server:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    preferIpAddress: true
