@@ -2,6 +2,11 @@ spring:
   application:
     name: clients-ms
 
+  data:
+    mongodb:
+      uri: urlMongo
+      database: climateDb
+
 server:
   port: 0
 
