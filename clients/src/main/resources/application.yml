@@ -4,11 +4,11 @@ spring:
 
   data:
     mongodb:
-      uri: urlMongo
+      uri: mongodb://root:root@MONGOAPPL:27017/climateDb?retryWrites=true&w=majority
       database: climateDb
 
 server:
-  port: 0
+  port: 8081
 
 eureka:
   client:

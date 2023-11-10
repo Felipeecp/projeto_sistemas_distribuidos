@@ -19,16 +19,16 @@ public class ClientService {
     }
 
     public void create(Sensor sensor){
-        List<Sensor> sensorList = sensorRepository.findAllByOrderByCodWMODesc();
+        List<Sensor> sensorList = sensorRepository.findAllByOrderByWmoDesc();
 
         String nextId = sensorList.stream().findFirst().map(item ->{
-            String idAtual = item.getCodWMO();
+            String idAtual = item.getWmo();
 
             int numericPart = Integer.parseInt(idAtual.substring(1));
             return "A" + String.format("%03d",numericPart+1);
         }).orElse("A001");
 
-        sensor.setCodWMO(nextId);
+        sensor.setWmo(nextId);
 
         sensorRepository.save(sensor);
     }

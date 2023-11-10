@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface SensorRepository extends MongoRepository<Sensor,String> {
 
-    List<Sensor> findAllByOrderByCodWMODesc();
+    List<Sensor> findAllByOrderByWmoDesc();
 
 }
