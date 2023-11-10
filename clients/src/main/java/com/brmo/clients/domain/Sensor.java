@@ -4,33 +4,38 @@ import com.brmo.clients.domain.enumerated.Region;
 import com.brmo.clients.domain.enumerated.UF;
 import com.brmo.clients.dto.SensorRecord;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.lang.annotation.Documented;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Document("sensor")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Sensor {
+
     @Id
-    private String codWMO;
-    private String cidade;
-    private Region regiao;
-    private String dataCriacao;
-    private UF uf;
-    private String latitude;
-    private String longitude;
-    private double altitude;
+    private String id;
+
+    private String ibgeCod;
+    private String nameState;
+    private String nameCity;
+    private Double longitude;
+    private Double latitude;
+    private Integer altitude;
+    private String wmo;
+    private String uf;
+    private Region region;
 
     public static Sensor of(SensorRecord record){
         return new ObjectMapper().convertValue(record, Sensor.class);
     }
+
+
 }
