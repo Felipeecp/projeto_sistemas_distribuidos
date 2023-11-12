@@ -17,12 +17,38 @@ services:
                                         cpus: '0.50'
                                         memory: 512M
 
+        gateway:
+                build: ./gateway/
+                image: gateway-server:0.1
+                container_name: gateway
+                depends_on:
+                        eureka:
+                                condition: service_started
+                links:
+                        - eureka
+                ports:
+                        - "8180:8180"
+                networks:
+                        micro_network:
+                                ipv4_address: 172.19.0.6
+                deploy:
+                        resources:
+                                limits:
+                                        cpus: '0.50'
+                                        memory: 512M
+
         readsensor:
                 build: ./readsensor/
                 image: readsensor:0.1
                 container_name: readsensor
                 ports:
                         - "8380:8380"
+                depends_on:
+                        eureka:
+                                condition: service_started
+                        gateway:
+                                condition: service_started
+
                 links:
                         - eureka
                         - gateway
@@ -43,6 +69,11 @@ services:
                 container_name: sensorsave
                 ports:
                         - "8480:8480"
+                depends_on:
+                        eureka:
+                                condition: service_started
+                        gateway:
+                                condition: service_started
                 links:
                         - eureka
                         - gateway
@@ -63,6 +94,11 @@ services:
                 container_name: clients
                 ports:
                         - "8580:8580"
+                depends_on:
+                        eureka:
+                                condition: service_started
+                        gateway:
+                                condition: service_started
                 links:
                         - eureka
                         - gateway
@@ -78,22 +114,7 @@ services:
                                         memory: 512M
 
 
-        gateway:
-                build: ./gateway/
-                image: gateway-server:0.1
-                container_name: gateway
-                links:
-                        - eureka
-                ports:
-                        - "8180:8180"
-                networks:
-                        micro_network:
-                                ipv4_address: 172.19.0.6
-                deploy:
-                        resources:
-                                limits:
-                                        cpus: '0.50'
-                                        memory: 512M
+
         
 networks:
         micro_network:

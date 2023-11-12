@@ -1,5 +1,10 @@
+FROM maven:3.9-amazoncorretto-17 as build
+WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
+
 FROM openjdk:17
-VOLUME /app/log
-ADD target/server-0.0.1-SNAPSHOT.jar server-0.0.1-SNAPSHOT.jar
-EXPOSE 8380
-ENTRYPOINT ["java", "-jar", "server-0.0.1-SNAPSHOT.jar"]
+WORKDIR /app
+COPY --from=build ./app/target/*.jar ./app.jar
+EXPOSE 8761
+ENTRYPOINT java -jar -Dspring.profiles.active=hti app.jar

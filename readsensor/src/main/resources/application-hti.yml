@@ -3,20 +3,16 @@ spring:
   application:
     name: ms-read-sensor
   rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
-
-server:
-  port: 0
+    host: ${HOST_MQ}
+    virtual-host: ${VIRTUAL_HOST_MQ}
+    port: ${PORT_MQ}
+    username: ${USERNAME_MQ}
+    password: ${PASSWORD_MQ}
 
 eureka:
   client:
-    registerWithEureka: true
-    fetchRegistry: true
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://${EUREKA_SERVER}:8761/eureka
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
     preferIpAddress: true

@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: eureka-server-brmo
+  config:
+    activate:
+      on-profile: hti

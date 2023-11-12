@@ -1,4 +1,4 @@
-spring:
+2spring:
   application:
     name: eureka-server-brmo
 
