@@ -9,13 +9,7 @@ services:
                 ports:
                         - "8761:8761"
                 networks:
-                        micro_network:
-                                ipv4_address: 172.19.0.2
-                deploy:
-                        resources:
-                                limits:
-                                        cpus: '0.50'
-                                        memory: 512M
+                        - micro_network
 
         gateway:
                 build: ./gateway/
@@ -29,13 +23,7 @@ services:
                 ports:
                         - "8180:8180"
                 networks:
-                        micro_network:
-                                ipv4_address: 172.19.0.6
-                deploy:
-                        resources:
-                                limits:
-                                        cpus: '0.50'
-                                        memory: 512M
+                        - micro_network
 
         readsensor:
                 build: ./readsensor/
@@ -55,13 +43,7 @@ services:
                 volumes:
                         - /opt/docker/log:/app/log
                 networks:
-                        micro_network:
-                                ipv4_address: 172.19.0.4
-                deploy:
-                        resources:
-                                limits:
-                                        cpus: '0.50'
-                                        memory: 512M
+                        - micro_network
 
         sensorsave:
                 build: ./sensorsave/
@@ -80,13 +62,7 @@ services:
                 volumes:
                         - /opt/docker/log:/app/log
                 networks:
-                        micro_network:
-                                ipv4_address: 172.19.0.5
-                deploy:
-                        resources:
-                                limits:
-                                        cpus: '0.50'
-                                        memory: 512M
+                        - micro_network
 
         client:
                 build: ./clients/
@@ -105,22 +81,8 @@ services:
                 volumes:
                         - /opt/docker/log:/app/log
                 networks:
-                        micro_network:
-                                ipv4_address: 172.19.0.3
-                deploy:
-                        resources:
-                                limits:
-                                        cpus: '0.50'
-                                        memory: 512M
+                        - micro_network
 
-
-
-        
 networks:
         micro_network:
                 driver: bridge  
-                ipam:
-                        driver: default
-                        config:
-                                - subnet: "172.19.0.0/16"
-    
