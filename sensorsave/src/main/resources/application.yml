@@ -3,10 +3,15 @@ spring:
   application:
     name: sensor-save-ms
   rabbitmq:
+    virtual-host:
     host: localhost
     port: 5672
     username: guest
     password: guest
+  data:
+    mongodb:
+      uri: mongodb+srv://user:password@host/?retryWrites=true&w=majority
+      database: database
 
 server:
   port: 0

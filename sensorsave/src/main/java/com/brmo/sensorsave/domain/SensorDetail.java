@@ -1,6 +1,23 @@
 package com.brmo.sensorsave.domain;
 
-import java.time.LocalDateTime;
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-public record SensorDetail( String codWMO, LocalDateTime registrationDate, Data data ){
+import java.time.Instant;
+
+@Document("sensorData")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+public class SensorDetail{
+
+    @Id
+    private String id;
+
+    private String codWMO;
+    private Instant registrationDate;
+    private Data data;
 }

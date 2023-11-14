@@ -12,4 +12,6 @@ ARG VIRTUAL_HOST=localhost
 ARG PORT_MQ=5672
 ARG USERNAME_MQ=guest
 ARG PASSWORD=guest
+ARG MONGO_URI=mongo_uri
+ARG MONGO_DATABASE=database
 ENTRYPOINT java -jar -Dspring.profiles.active=hti app.jar

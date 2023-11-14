@@ -8,6 +8,10 @@ spring:
     port: ${PORT_MQ}
     username: ${USERNAME_MQ}
     password: ${PASSWORD_MQ}
+  data:
+    mongodb:
+      uri: ${MONGO_URI}
+      database: ${MONGO_DATABASE}
 
 eureka:
   client:
