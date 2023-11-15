@@ -29,10 +29,8 @@ public class SensorDetailThreads extends Thread{
     @Override
     public void run() {
         for(CSVRecord record: records){
-            RowCities rowCity = RowCities.of(record);
-            //SensorDetail sensorDetail = getSensorDetail(record);
-            //sendData.sendData(sensorDetail);
-            sendData.save(rowCity);
+            SensorDetail sensorDetail = getSensorDetail(record);
+            sendData.sendData(sensorDetail);
         }
     }
 

@@ -10,6 +10,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -17,7 +18,8 @@ import java.io.IOException;
 @Component
 public class SendDataImpl implements SendData{
 
-    private static final String URL = "http://localhost:8081/client";
+    @Value("${urlApplication}")
+    private String host;
     @Autowired
     private ObjectMapper mapper;
 
@@ -31,8 +33,8 @@ public class SendDataImpl implements SendData{
                 .setConnectionManager(connManager)
                 .build();
         try {
-            String entity  = mapper.writeValueAsString(sensorDetail);
-            HttpPost httpPost = new HttpPost(URL.concat("/save"));
+            String entity = mapper.writeValueAsString(sensorDetail);
+            HttpPost httpPost = new HttpPost(host);
             httpPost.setEntity(new StringEntity(entity, "UTF-8"));
 
             httpPost.setHeader("Accept", "application/json");
@@ -48,33 +50,5 @@ public class SendDataImpl implements SendData{
         connManager.close();
 
     }
-
-    public void save(RowCities rowCities){
-        PoolingHttpClientConnectionManager connManager = new PoolingHttpClientConnectionManager();
-        connManager.setMaxTotal(100);
-
-        CloseableHttpClient client = HttpClients.custom()
-                .evictExpiredConnections()
-                .setConnectionManager(connManager)
-                .build();
-
-        try {
-            String entity  = mapper.writeValueAsString(rowCities);
-            HttpPost httpPost = new HttpPost(URL);
-            httpPost.setEntity(new StringEntity(entity, "UTF-8"));
-
-            httpPost.setHeader("Accept", "application/json");
-            httpPost.setHeader("Content-type", "application/json");
-            httpPost.setHeader("charset", "UTF-8");
-
-            client.execute(httpPost);
-            client.close();
-        } catch (IOException e) {
-            throw new BusinessExceptions(e.getMessage());
-        }
-
-        connManager.close();
-    }
-
 
 }
