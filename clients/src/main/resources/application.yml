@@ -4,16 +4,16 @@ spring:
 
   data:
     mongodb:
-      uri: mongodb://root:root@MONGOAPPL:27017/climateDb?retryWrites=true&w=majority
+      uri: mongodb+srv://root:root@cluster0.jjvyex7.mongodb.net/?retryWrites=true&w=majority
       database: climateDb
 
 server:
-  port: 8081
+  port: 0
 
-#eureka:
-#  client:
-#    server-url:
-#      defaultZone: http://localhost:8761/eureka
-#  instance:
-#    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-#    preferIpAddress: true
+eureka:
+  client:
+    server-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    preferIpAddress: true
