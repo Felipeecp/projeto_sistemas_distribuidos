@@ -10,7 +10,7 @@ spring:
     password: ${PASSWORD_MQ}
   data:
     mongodb:
-      uri: ${MONGO_URI}
+      uri: mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_CLUSTER}/${MONGO_DATABASE}?retryWrites=true&w=majority
       database: ${MONGO_DATABASE}
 
 eureka:
