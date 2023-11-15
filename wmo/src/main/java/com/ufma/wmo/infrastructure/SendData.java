@@ -7,6 +7,4 @@ public interface SendData {
 
     void sendData(SensorDetail sensorDetail);
 
-    public void save(RowCities rowCities);
-
 }

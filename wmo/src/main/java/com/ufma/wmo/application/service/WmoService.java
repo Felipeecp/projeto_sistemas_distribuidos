@@ -25,10 +25,12 @@ public class WmoService {
 
     @Value("classpath:/data/cidades/cidades.csv")
     private Resource resource;
+
     private final SendData sendData;
     private final Map<String, RowState> rowStateMap;
 
     public void run() {
+
         long init = System.currentTimeMillis();
         List<CSVRecord> records = getRecords();
 
