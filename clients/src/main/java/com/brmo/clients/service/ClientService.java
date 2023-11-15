@@ -38,4 +38,7 @@ public class ClientService {
         return allSensors;
     }
 
+    public void delete(String sensorId) {
+        sensorRepository.deleteById(sensorId);
+    }
 }
