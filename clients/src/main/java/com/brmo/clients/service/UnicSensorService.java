@@ -4,9 +4,9 @@ import com.brmo.clients.domain.Sensor;
 import com.brmo.clients.domain.SensorDetail;
 import com.brmo.clients.domain.SensorInfo;
 import com.brmo.clients.domain.UnicSensorData;
+import com.brmo.clients.exception.NotFoundException;
 import com.brmo.clients.repository.SensorDetailRepository;
 import com.brmo.clients.repository.SensorRepository;
-import jakarta.ws.rs.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,7 +38,7 @@ public class UnicSensorService {
 
             return unicSensorData;
         }else {
-            throw new NotFoundException();
+            throw new NotFoundException("Erro ao buscar o último sensor.");
         }
     }
 }

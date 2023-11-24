@@ -6,6 +6,7 @@ import com.brmo.clients.dto.SensorRecord;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.lang.annotation.Documented;
@@ -29,6 +30,7 @@ public class Sensor {
     private Double longitude;
     private Double latitude;
     private Integer altitude;
+    @Indexed
     private String wmo;
     private String uf;
     private Region region;

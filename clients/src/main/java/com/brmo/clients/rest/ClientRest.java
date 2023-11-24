@@ -3,6 +3,7 @@ package com.brmo.clients.rest;
 import com.brmo.clients.domain.Sensor;
 import com.brmo.clients.domain.SensorDetail;
 import com.brmo.clients.domain.UnicSensorData;
+import com.brmo.clients.dto.MapInfo;
 import com.brmo.clients.service.ClientService;
 import com.brmo.clients.service.SensorDetailService;
 import com.brmo.clients.service.UnicSensorService;
@@ -71,4 +72,10 @@ public class ClientRest {
         List<SensorDetail> sensorDetailList = sensorDetailService.findAll();
         return new ResponseEntity<>(sensorDetailList, HttpStatus.OK);
     }
+
+    @GetMapping("/findAverageMaps")
+    public ResponseEntity<List<MapInfo>> findAverageMaps(){
+        return ResponseEntity.ok(service.findAverageMaps());
+    }
+
 }
