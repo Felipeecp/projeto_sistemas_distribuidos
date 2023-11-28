@@ -12,6 +12,15 @@ public interface SensorRepository extends MongoRepository<Sensor,String> {
     Sensor findTopByWmo(String codWMO);
     List<Sensor> findAllByOrderByWmoDesc();
 
+    @Aggregation(pipeline = {
+            "{ $sort: { wmo: -1 } }",
+            "{ $group: { _id: '$region', sensors: { $push: '$$ROOT' } } }",
+            "{ $project: { sensors: { $slice: ['$sensors', 2] } } }",
+            "{ $unwind: '$sensors' }",
+            "{ $replaceRoot: { newRoot: '$sensors' } }"
+    })
+    List<Sensor> findTop10ByOrderByWmoDesc();
+
 
     @Aggregation(pipeline = {
             "{ $group: {_id: '$uf', region: { $first: '$region'}, totalSensor: {$sum: 1}, cdg: {$addToSet: '$wmo'}}}",

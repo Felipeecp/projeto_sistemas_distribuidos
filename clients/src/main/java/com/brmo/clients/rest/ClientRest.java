@@ -1,8 +1,6 @@
 package com.brmo.clients.rest;
 
-import com.brmo.clients.domain.Sensor;
-import com.brmo.clients.domain.SensorDetail;
-import com.brmo.clients.domain.UnicSensorData;
+import com.brmo.clients.domain.*;
 import com.brmo.clients.dto.MapInfo;
 import com.brmo.clients.service.ClientService;
 import com.brmo.clients.service.SensorDetailService;
@@ -14,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -43,16 +42,10 @@ public class ClientRest {
         return new ResponseEntity<>(sensorInfoAndLastData,HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<Void> create(@RequestBody Sensor sensor){
-        service.create(sensor);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
-
-    @DeleteMapping("/{sensorId}")
-    public ResponseEntity<Void> delete(@PathVariable String sensorId){
-        service.delete(sensorId);
-        return ResponseEntity.status(HttpStatus.OK).build();
+    @GetMapping("/topSensorByWmo")
+    public ResponseEntity<List<Sensor>> getTop10SensorOrderByWmo(){
+        List<Sensor> sensorOrderByWmo = service.findSensorOrderByWmo();
+        return new ResponseEntity<>(sensorOrderByWmo,HttpStatus.OK);
     }
 
     @GetMapping("/sensorDetail/distincCodWMO")
@@ -73,9 +66,39 @@ public class ClientRest {
         return new ResponseEntity<>(sensorDetailList, HttpStatus.OK);
     }
 
+    @GetMapping("/sensorDetail/ultimosDados/{codWMO}")
+    public ResponseEntity<UltimosDadosSensor> getUltimosDadosSensor(@PathVariable String codWMO){
+        return new ResponseEntity<>(sensorDetailService.getUltimos7Dados(codWMO), HttpStatus.OK);
+    }
+
+    @GetMapping("/sensorDetail/weatherClassification")
+    public ResponseEntity<List<ClimateClassification>> getWheaterClassification(){
+        return new ResponseEntity<>(sensorDetailService.classifyWeather(), HttpStatus.OK);
+    }
+
     @GetMapping("/findAverageMaps")
     public ResponseEntity<List<MapInfo>> findAverageMaps(){
         return ResponseEntity.ok(service.findAverageMaps());
     }
 
+    @GetMapping("/sensorDetail/ultimosDados/temperatures")
+    public ResponseEntity<List<UltimosDadosSensor>> getTemperatures(
+            @RequestParam String sensorACode,
+            @RequestParam String sensorBCode) {
+
+        List<UltimosDadosSensor> lastsTemperatures = sensorDetailService.getLastsTemperatures(sensorACode, sensorBCode);
+        return new ResponseEntity<>(lastsTemperatures, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> create(@RequestBody Sensor sensor){
+        service.create(sensor);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @DeleteMapping("/{sensorId}")
+    public ResponseEntity<Void> delete(@PathVariable String sensorId){
+        service.delete(sensorId);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }
