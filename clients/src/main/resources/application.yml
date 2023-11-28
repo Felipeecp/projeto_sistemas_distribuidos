@@ -4,7 +4,7 @@ spring:
 
   data:
     mongodb:
-      uri: mongoUrl
+      uri: mongodb+srv://root:root@cluster0.jjvyex7.mongodb.net/?retryWrites=true&w=majority
       database: climateDb
 
 server:

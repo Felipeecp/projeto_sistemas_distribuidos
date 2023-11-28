@@ -5,8 +5,8 @@ import com.brmo.clients.repository.SensorRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -19,24 +19,33 @@ public class ClientService {
     }
 
     public void create(Sensor sensor){
-        List<Sensor> sensorList = sensorRepository.findAllByOrderByWmoDesc();
+        // Busca o maior valor de WMO entre os sensores existentes
+        String maxWmo = sensorRepository.findAll()
+                .stream()
+                .map(Sensor::getWmo)
+                .filter(wmo -> wmo.startsWith("REAL_"))
+                .max(Comparator.naturalOrder())
+                .orElse("REAL_000000");
 
-        String nextId = sensorList.stream().findFirst().map(item ->{
-            String idAtual = item.getWmo();
+        // Extrai a parte numérica do WMO e incrementa
+        int numericPart = Integer.parseInt(maxWmo.substring(5));
+        String nextId = String.format("REAL_%06d", numericPart + 1);
 
-            int numericPart = Integer.parseInt(idAtual.substring(1));
-            return "A" + String.format("%03d",numericPart+1);
-        }).orElse("A001");
-
+        // Define o novo WMO e salva o sensor
         sensor.setWmo(nextId);
-
         sensorRepository.save(sensor);
+    }
+
+    public List<Sensor> findSensorOrderByWmo(){
+        return sensorRepository.findTop10ByOrderByWmoDesc();
     }
 
     public List<Sensor> findAll(){
         List<Sensor> allSensors = sensorRepository.findAll();
         return allSensors;
     }
+
+
 
     public void delete(String sensorId) {
         sensorRepository.deleteById(sensorId);
