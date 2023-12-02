@@ -34,7 +34,7 @@ O prazo para a conclusão do projeto é até o dia 27 de novembro de 2023. Para 
 |            | <ul><li>Implementação Spring Cloud ✅</li><li>Implementação microsserviços de leitura e escrita de dados dos sensores ✅</li><li>Implementação de mensageria ✅</li><li>Conexão com Mongo-db Cloud ✅</li><li>Instalação de servidor em cloud ✅</li></ul> |        |
 | 24/10/2023 | Desenvolvimento de aplicação de obtenção de dados do INPE                                                                                                                                                                                                  | ✅     |
 | 07/11/2023 | Desenvolvimento de Front-end para visualização                                                                                                                                                                                                             | ✅     |
-|            | <ul><li>Pagina de detalhes sensor ✅</li><li>Pagina de cadastro de novos sensores ✅</li><li>Tornar responsivo 🟡</li><li>Conexão com API 🟡</li></ul> |        |
+|            | <ul><li>Pagina de detalhes sensor ✅</li><li>Pagina de cadastro de novos sensores ✅</li><li>Tornar responsivo ✅</li><li>Conexão com API ✅</li></ul> |        |
 | 14/11/2023 | Integração de middleware com front-end e sensores                                                                                                                                                                                                             | ✅     |
 | 21/11/2023 | Testes e validação da aplicação                                                                                                                                                                                                                            | ✅     |
 | 28/11/2023 | Entrega final do projeto                                                                                                                                                                                                                                   | ✅     |
@@ -52,4 +52,4 @@ Os recursos utilizados no projeto incluem:
 - Servidor em nuvem para armazenamento dos dados coletados;
 - Banco de dados NoSQL para salvar os dados intermediários do INPE.
 
-![Frontend do Projeto](https://github.com/Felipeecp/climate-dashboard)
+[Frontend do Projeto](https://github.com/Felipeecp/climate-dashboard)
